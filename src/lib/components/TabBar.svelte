@@ -16,6 +16,7 @@
   import { createDelayedCall } from "$lib/utils/delayed-call";
   import { stripVerbatimPrefix, tabFolderLabel, tabsNeedingFolder } from "$lib/utils/path";
   import PanelResizer from "./PanelResizer.svelte";
+  import { translate, t } from "$lib/i18n";
 
   let {
     onCloseTab = (id: string) => tabStore.closeTab(id),
@@ -163,7 +164,7 @@
     if (!contextMenuTab) return;
     const copy = item === "path" ? copyPath : copyFileName;
     const success = await copy(contextMenuTab.filePath);
-    copyFeedback = { item, text: success ? "Copied!" : "Failed" };
+    copyFeedback = { item, text: success ? translate("common.copied") : translate("common.copyFailed") };
     closeAfterFeedback.schedule();
   }
 
@@ -264,7 +265,7 @@
     </div>
 
     <!-- New tab button -->
-    <button class="new-tab-btn" onclick={handleNewTab} title="New tab">
+    <button class="new-tab-btn" onclick={handleNewTab} title={$t('tabbar.newTab')}>
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
         <line x1="6" y1="2" x2="6" y2="10"/>
         <line x1="2" y1="6" x2="10" y2="6"/>
@@ -309,7 +310,7 @@
         <span>{copyFeedback?.item === "name" ? copyFeedback.text : "Copy File Name"}</span>
       </button>
       <button onclick={() => handleCopy("path")} class="dropdown-item">
-        <span>{copyFeedback?.item === "path" ? copyFeedback.text : "Copy Path"}</span>
+        <span>{copyFeedback?.item === "path" ? copyFeedback.text : $t('tabbar.copyPath')}</span>
       </button>
       <button onclick={handleReveal} class="dropdown-item">
         <span>{copyFeedback?.item === "reveal" ? copyFeedback.text : "Open File Location"}</span>
