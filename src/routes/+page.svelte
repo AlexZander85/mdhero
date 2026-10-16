@@ -17,6 +17,7 @@
   } from "$lib/tauri/files";
   import { showToast } from "$lib/stores/toast";
   import { basename } from "$lib/utils/path";
+  import { promptOverwrite, promptUnsaved } from "$lib/utils/unsaved-prompt";
   import { settings, getContentMaxWidth, stepFontSize, DEFAULT_FONT_SIZE } from "$lib/stores/settings";
   import { initFileWatcher, stopFileWatcher } from "$lib/tauri/watcher";
   import { restoreSession } from "$lib/tauri/session";
@@ -331,8 +332,11 @@
     });
   }
 
-  async function handleSave(tab: Tab) {
-    if (!tab.dirty) return;
+  /** Saves the tab. Returns false if nothing was written — not dirty, the
+   *  Save-As dialog was cancelled, the on-disk version was kept, or the write
+   *  failed. Callers that gate a destructive action on a save need that (#160). */
+  async function handleSave(tab: Tab): Promise<boolean> {
+    if (!tab.dirty) return true;
     try {
       let targetPath = tab.filePath;
       let targetName = tab.fileName;
@@ -340,20 +344,18 @@
       // this first save, which rebinds the tab to the chosen real path (#63).
       if (tab.filePath.startsWith("new://")) {
         const saved = await saveAsNewDocument(tab.id, tab.editContent);
-        if (!saved) return; // cancelled — keep editing, stays dirty
+        if (!saved) return false; // cancelled — keep editing, stays dirty
         targetPath = saved;
         targetName = basename(saved);
       } else {
         if (tab.diskChanged) {
           // The file changed on disk while these edits were unsaved (#97).
-          // Same convention as the close dialog: the default button is the
-          // safe one, so a reflexive Return keeps editing.
-          const { ask } = await import("@tauri-apps/plugin-dialog");
-          const keepEditing = await ask(
-            `${tab.fileName} changed on disk while you were editing. Saving will overwrite that version.`,
-            { title: "File changed on disk", kind: "warning", okLabel: "Keep Editing", cancelLabel: "Overwrite" }
+          // Overwrite is the explicit answer; Escape and the close box cancel
+          // the save and leave both versions intact (#160).
+          const overwrite = await promptOverwrite(
+            `${tab.fileName} changed on disk while you were editing. Saving will overwrite that version.`
           );
-          if (keepEditing) return;
+          if (!overwrite) return false;
         }
         await saveFile(tab.filePath, tab.editContent);
       }
@@ -381,9 +383,11 @@
         loading: false,
         error: null,
       });
+      return true;
     } catch (err) {
       console.error("Save failed:", err);
       alert(`Save failed: ${err}`);
+      return false;
     }
   }
 
@@ -499,26 +503,27 @@
     // WKWebView (silently returns false), which made this guard dead and closed
     // dirty tabs without warning.
     if (t.dirty) {
-      const { ask } = await import("@tauri-apps/plugin-dialog");
-      // The primary/default button (Enter) must be the SAFE action, so a
-      // reflexive Return can't destroy unsaved work. `ask`'s OK button is the
-      // default, so OK = "Keep Editing" and the cancel-position button is the
-      // deliberate, non-default "Discard".
-      const keepEditing = await ask(`You have unsaved changes to ${t.fileName}.`, {
-        title: "Unsaved changes",
-        kind: "warning",
-        okLabel: "Keep Editing",
-        cancelLabel: "Discard",
-      });
-      if (keepEditing) return false;
+      // Three answers, so neither reflex is destructive: Return saves, Escape
+      // cancels, and Discard has to be clicked (#160). Anything unexpected is
+      // treated as Cancel — see `promptUnsaved`.
+      const choice = await promptUnsaved(`You have unsaved changes to ${t.fileName}.`);
+      if (choice === "cancel") return false;
+      if (choice === "save") {
+        if (!(await handleSave(t))) return false; // save cancelled or failed
+      }
     }
     // Flush reading progress before closing — catches the case where user
     // scrolls and closes within the 500ms debounce window
     if (t.id === $activeTabId) {
       saveProgressNow();
     }
+    // Re-read the tab: saving a `new://` document rebinds it to the real path
+    // it was just written to, and `t` is a snapshot from before that. Unwatching
+    // the stale `new://` path would leave the real file watched after the tab
+    // closed.
+    const watchedPath = $tabs.find((x) => x.id === id)?.filePath ?? t.filePath;
     tabStore.closeTab(id);
-    unwatchFile(t.filePath);
+    unwatchFile(watchedPath);
     return true;
   }
 
@@ -623,21 +628,21 @@
     (window as any).__mdhero_quit = async () => {
       const dirty = $tabs.filter((t) => t.dirty);
       if (dirty.length > 0) {
-        try {
-          const { ask } = await import("@tauri-apps/plugin-dialog");
-          const msg =
-            dirty.length === 1
-              ? `You have unsaved changes to ${dirty[0].fileName}.`
-              : `You have unsaved changes in ${dirty.length} tabs.`;
-          const keepEditing = await ask(msg, {
-            title: "Unsaved changes",
-            kind: "warning",
-            okLabel: "Keep Editing",
-            cancelLabel: "Discard",
-          });
-          if (keepEditing) return;
-        } catch {
-          // Fall through and quit rather than trap the user behind prevent_close.
+        const msg =
+          dirty.length === 1
+            ? `You have unsaved changes to ${dirty[0].fileName}.`
+            : `You have unsaved changes in ${dirty.length} tabs.`;
+        const choice = await promptUnsaved(msg);
+        // Cancel, Escape, the close box and a dialog that fails all land here.
+        // The old code quit on a dialog failure, which is the same data loss by
+        // a different route (#160).
+        if (choice === "cancel") return;
+        if (choice === "save") {
+          for (const t of dirty) {
+            // An unsaved `new://` tab opens a Save-As dialog; cancelling that
+            // one aborts the quit rather than dropping the document.
+            if (!(await handleSave(t))) return;
+          }
         }
       }
       saveProgressNow();
