@@ -2,6 +2,8 @@ mod commands;
 pub mod menu;
 mod watcher;
 
+pub struct AppLocale(pub std::sync::Mutex<String>);
+
 use std::sync::Mutex;
 use tauri::Manager;
 
@@ -76,6 +78,7 @@ pub fn run() {
         .plugin(tauri_plugin_cli::init())
         .manage(watcher::WatcherState::default())
         .manage(OpenedFiles::default())
+        .manage(AppLocale(std::sync::Mutex::new("en".to_string())))
         .invoke_handler(tauri::generate_handler![
             commands::read_markdown_file,
             commands::write_markdown_file,
@@ -86,6 +89,9 @@ pub fn run() {
             commands::list_folder_md_files,
             commands::quit_app,
             commands::show_ai_context_menu,
+            commands::translate_text,
+            commands::set_locale,
+            commands::rebuild_menu,
             watcher::watch_file,
             watcher::unwatch_file,
             watcher::stop_watching,
@@ -93,7 +99,7 @@ pub fn run() {
         ])
         .setup(|app| {
             let handle = app.handle().clone();
-            let menu = menu::create_menu(&handle)?;
+            let menu = menu::create_menu(&handle, "en")?;
             app.set_menu(menu)?;
 
             // Red-button (window) close routes through the frontend quit guard
