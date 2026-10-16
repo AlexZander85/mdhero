@@ -2,6 +2,7 @@
   import { tabStore, HOME_TAB_ID, type Tab } from "$lib/stores/tabs";
   import { newDocument, revealInFileManager } from "$lib/tauri/files";
   import { copyFileName, copyPath } from "$lib/utils/clipboard";
+  import { createDelayedCall } from "$lib/utils/delayed-call";
 
   let {
     onCloseTab = (id: string) => tabStore.closeTab(id),
@@ -100,6 +101,9 @@
     contextMenuPos = { x: Math.min(rect.left, window.innerWidth - menuWidth - 8), y: rect.bottom + 4 };
     contextMenuTab = tab;
     copyFeedback = null;
+    // The previous menu may still be showing its feedback: its close must not
+    // shut this one.
+    closeAfterFeedback.cancel();
   }
 
   function closeContextMenu() {
@@ -107,12 +111,15 @@
     copyFeedback = null;
   }
 
+  // Leaves the feedback up long enough to read before the menu closes.
+  const closeAfterFeedback = createDelayedCall(closeContextMenu, 900);
+
   async function handleCopy(item: "path" | "name") {
     if (!contextMenuTab) return;
     const copy = item === "path" ? copyPath : copyFileName;
     const success = await copy(contextMenuTab.filePath);
     copyFeedback = { item, text: success ? "Copied!" : "Failed" };
-    setTimeout(closeContextMenu, 900);
+    closeAfterFeedback.schedule();
   }
 
   // On success the file manager window is the feedback, so the menu just
@@ -125,7 +132,7 @@
     } catch (err) {
       console.error("revealItemInDir failed:", err);
       copyFeedback = { item: "reveal", text: "Failed" };
-      setTimeout(closeContextMenu, 900);
+      closeAfterFeedback.schedule();
     }
   }
 
