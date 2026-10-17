@@ -20,12 +20,10 @@
 //     destructive path, which is why a dialog failure also quit the app.
 //  2. The cancel button is titled exactly "Cancel". That string is what makes
 //     Escape work on macOS; renaming it silently removes the Escape route.
-//     So on macOS it stays in English even when the other buttons are
-//     translated. Elsewhere it is translated: whatever Escape resolves to there,
-//     anything but an explicit Save or Discard is a cancel (rule 1).
+//     So it stays in English even when the other buttons are translated, until
+//     a translated Cancel is shown to keep Escape there.
 
 import { translate } from "../i18n";
-import { isMac } from "./platform";
 
 /** The English labels. With custom buttons the dialog resolves to the label
  *  string of the button that was clicked, not to "Yes"/"No"/"Cancel". */
@@ -34,14 +32,14 @@ export const DISCARD_LABEL = "Discard";
 export const CANCEL_LABEL = "Cancel";
 export const OVERWRITE_LABEL = "Overwrite";
 
-/** The labels in the interface language. Each prompt reads them once and
- *  compares the result against the same strings it showed. */
+/** The labels in the interface language, bar Cancel (rule 2). Each prompt
+ *  reads them once and compares the result against the same strings it showed. */
 function labels() {
   return {
     save: translate("common.save"),
     discard: translate("page.discard"),
     overwrite: translate("page.overwrite"),
-    cancel: isMac() ? CANCEL_LABEL : translate("common.cancel"),
+    cancel: CANCEL_LABEL,
   };
 }
 

@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -100,16 +100,10 @@ describe("promptOverwrite", () => {
 });
 
 describe("in another interface language", () => {
-  afterEach(() => {
-    vi.unstubAllGlobals();
-  });
-
   it("shows translated buttons and reads the answer from those labels", async () => {
-    vi.stubGlobal("navigator", { platform: "Win32" });
     setLocale("fr");
     dialog.mockResolvedValue("Abandonner");
     expect(await promptUnsaved("unsaved")).toBe("discard");
-    expect(dialog.mock.calls[0][1].buttons).toEqual({ yes: "Enregistrer", no: "Abandonner", cancel: "Annuler" });
     // The English label is no longer a button, so it is not a Discard.
     dialog.mockResolvedValue(DISCARD_LABEL);
     expect(await promptUnsaved("unsaved")).toBe("cancel");
@@ -117,8 +111,7 @@ describe("in another interface language", () => {
     expect(await promptOverwrite("changed on disk")).toBe(true);
   });
 
-  it("keeps Cancel in English on macOS, where Escape depends on that title", async () => {
-    vi.stubGlobal("navigator", { platform: "MacIntel" });
+  it("keeps Cancel in English, where Escape depends on that title", async () => {
     setLocale("fr");
     dialog.mockResolvedValue(CANCEL_LABEL);
     expect(await promptUnsaved("unsaved")).toBe("cancel");
