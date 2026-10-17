@@ -273,7 +273,6 @@
     "wontOpenExecutable": "不会打开可执行文件“{name}”。如果您信任它，请从文件管理器中打开。",
     "couldntOpen": "无法打开“{name}”",
     "unsavedChangesTitle": "未保存的更改",
-    "keepEditing": "继续编辑",
     "discard": "放弃更改",
     "diskChangedTitle": "文件已在磁盘上更改",
     "diskChangedMsg": "{name} 在您编辑期间已在磁盘上被修改。保存将覆盖该版本。",

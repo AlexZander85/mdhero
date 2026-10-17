@@ -275,7 +275,6 @@
     "wontOpenExecutable": "Won't open executable file \"{name}\". Open it from your file manager if you trust it.",
     "couldntOpen": "Couldn't open \"{name}\"",
     "unsavedChangesTitle": "Unsaved changes",
-    "keepEditing": "Keep Editing",
     "discard": "Discard",
     "diskChangedTitle": "File changed on disk",
     "diskChangedMsg": "{name} changed on disk while you were editing. Saving will overwrite that version.",

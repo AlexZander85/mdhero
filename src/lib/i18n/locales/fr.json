@@ -275,7 +275,6 @@
     "wontOpenExecutable": "Impossible d'ouvrir le fichier exécutable « {name} ». Ouvrez-le depuis votre gestionnaire de fichiers si vous lui faites confiance.",
     "couldntOpen": "Impossible d'ouvrir « {name} »",
     "unsavedChangesTitle": "Modifications non enregistrées",
-    "keepEditing": "Continuer l'édition",
     "discard": "Abandonner",
     "diskChangedTitle": "Fichier modifié sur le disque",
     "diskChangedMsg": "{name} a été modifié sur le disque pendant que vous l'éditiez. Enregistrer écrasera cette version.",

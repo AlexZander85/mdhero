@@ -20,14 +20,30 @@
 //     destructive path, which is why a dialog failure also quit the app.
 //  2. The cancel button is titled exactly "Cancel". That string is what makes
 //     Escape work on macOS; renaming it silently removes the Escape route.
+//     So on macOS it stays in English even when the other buttons are
+//     translated. Elsewhere it is translated: whatever Escape resolves to there,
+//     anything but an explicit Save or Discard is a cancel (rule 1).
 
-/** Labels are compared against the result, so they live in one place. With
- *  custom buttons the dialog resolves to the label string of the button that
- *  was clicked, not to "Yes"/"No"/"Cancel". */
+import { translate } from "../i18n";
+import { isMac } from "./platform";
+
+/** The English labels. With custom buttons the dialog resolves to the label
+ *  string of the button that was clicked, not to "Yes"/"No"/"Cancel". */
 export const SAVE_LABEL = "Save";
 export const DISCARD_LABEL = "Discard";
 export const CANCEL_LABEL = "Cancel";
 export const OVERWRITE_LABEL = "Overwrite";
+
+/** The labels in the interface language. Each prompt reads them once and
+ *  compares the result against the same strings it showed. */
+function labels() {
+  return {
+    save: translate("common.save"),
+    discard: translate("page.discard"),
+    overwrite: translate("page.overwrite"),
+    cancel: isMac() ? CANCEL_LABEL : translate("common.cancel"),
+  };
+}
 
 export type UnsavedChoice = "save" | "discard" | "cancel";
 
@@ -37,13 +53,14 @@ export type UnsavedChoice = "save" | "discard" | "cancel";
 export async function promptUnsaved(message: string, title = "Unsaved changes"): Promise<UnsavedChoice> {
   try {
     const { message: dialog } = await import("@tauri-apps/plugin-dialog");
+    const label = labels();
     const choice = await dialog(message, {
       title,
       kind: "warning",
-      buttons: { yes: SAVE_LABEL, no: DISCARD_LABEL, cancel: CANCEL_LABEL },
+      buttons: { yes: label.save, no: label.discard, cancel: label.cancel },
     });
-    if (choice === SAVE_LABEL) return "save";
-    if (choice === DISCARD_LABEL) return "discard";
+    if (choice === label.save) return "save";
+    if (choice === label.discard) return "discard";
     return "cancel";
   } catch (err) {
     console.error("Unsaved-changes dialog failed:", err);
@@ -57,12 +74,13 @@ export async function promptUnsaved(message: string, title = "Unsaved changes"):
 export async function promptOverwrite(message: string, title = "File changed on disk"): Promise<boolean> {
   try {
     const { message: dialog } = await import("@tauri-apps/plugin-dialog");
+    const label = labels();
     const choice = await dialog(message, {
       title,
       kind: "warning",
-      buttons: { ok: OVERWRITE_LABEL, cancel: CANCEL_LABEL },
+      buttons: { ok: label.overwrite, cancel: label.cancel },
     });
-    return choice === OVERWRITE_LABEL;
+    return choice === label.overwrite;
   } catch (err) {
     console.error("File-changed dialog failed:", err);
     return false;

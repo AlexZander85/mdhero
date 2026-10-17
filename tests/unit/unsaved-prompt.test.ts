@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -15,10 +15,14 @@ import {
   promptOverwrite,
   promptUnsaved,
 } from "../../src/lib/utils/unsaved-prompt";
+import { setLocale } from "../../src/lib/i18n";
 
 beforeEach(() => {
   dialog.mockReset();
   vi.spyOn(console, "error").mockImplementation(() => {});
+  // The labels follow the interface language, which would otherwise come from
+  // the OS language of the machine running the tests.
+  setLocale("en");
 });
 
 /**
@@ -92,6 +96,35 @@ describe("promptOverwrite", () => {
   it("keeps the on-disk version when the dialog fails", async () => {
     dialog.mockRejectedValue(new Error("no dialog"));
     expect(await promptOverwrite("changed on disk")).toBe(false);
+  });
+});
+
+describe("in another interface language", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("shows translated buttons and reads the answer from those labels", async () => {
+    vi.stubGlobal("navigator", { platform: "Win32" });
+    setLocale("fr");
+    dialog.mockResolvedValue("Abandonner");
+    expect(await promptUnsaved("unsaved")).toBe("discard");
+    expect(dialog.mock.calls[0][1].buttons).toEqual({ yes: "Enregistrer", no: "Abandonner", cancel: "Annuler" });
+    // The English label is no longer a button, so it is not a Discard.
+    dialog.mockResolvedValue(DISCARD_LABEL);
+    expect(await promptUnsaved("unsaved")).toBe("cancel");
+    dialog.mockResolvedValue("Écraser");
+    expect(await promptOverwrite("changed on disk")).toBe(true);
+  });
+
+  it("keeps Cancel in English on macOS, where Escape depends on that title", async () => {
+    vi.stubGlobal("navigator", { platform: "MacIntel" });
+    setLocale("fr");
+    dialog.mockResolvedValue(CANCEL_LABEL);
+    expect(await promptUnsaved("unsaved")).toBe("cancel");
+    expect(await promptOverwrite("changed on disk")).toBe(false);
+    expect(dialog.mock.calls[0][1].buttons).toEqual({ yes: "Enregistrer", no: "Abandonner", cancel: "Cancel" });
+    expect(dialog.mock.calls[1][1].buttons).toEqual({ ok: "Écraser", cancel: "Cancel" });
   });
 });
 

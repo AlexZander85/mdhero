@@ -275,7 +275,6 @@
     "wontOpenExecutable": "Die ausführbare Datei „{name}“ wird nicht geöffnet. Öffnen Sie sie aus Ihrem Dateimanager, wenn Sie ihr vertrauen.",
     "couldntOpen": "„{name}“ konnte nicht geöffnet werden",
     "unsavedChangesTitle": "Ungespeicherte Änderungen",
-    "keepEditing": "Weiter bearbeiten",
     "discard": "Verwerfen",
     "diskChangedTitle": "Datei auf dem Datenträger geändert",
     "diskChangedMsg": "{name} wurde auf dem Datenträger geändert, während Sie es bearbeitet haben. Beim Speichern wird diese Version überschrieben.",

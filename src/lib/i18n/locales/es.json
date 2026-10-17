@@ -275,7 +275,6 @@
     "wontOpenExecutable": "No se abrirá el archivo ejecutable «{name}». Ábrelo desde el administrador de archivos si confías en él.",
     "couldntOpen": "No se pudo abrir «{name}»",
     "unsavedChangesTitle": "Cambios sin guardar",
-    "keepEditing": "Seguir editando",
     "discard": "Descartar",
     "diskChangedTitle": "Archivo modificado en el disco",
     "diskChangedMsg": "{name} se modificó en el disco mientras lo editabas. Al guardar se sobrescribirá esa versión.",
