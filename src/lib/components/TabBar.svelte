@@ -208,7 +208,7 @@
 <svelte:window onkeydowncapture={handleMenuKeydown} />
 
 {#snippet tabName(tab: Tab)}
-  {#if tab.diskChanged}<span class="tab-disk" title="Changed on disk while you were editing">⟳</span>{:else if tab.dirty}<span class="tab-dirty" title="Unsaved changes">•</span>{/if}{tab.fileName}
+  {#if tab.diskChanged}<span class="tab-disk" title={$t('tabbar.diskChanged')}>⟳</span>{:else if tab.dirty}<span class="tab-dirty" title={$t('tabbar.unsaved')}>•</span>{/if}{tab.fileName}
 {/snippet}
 
 <div class="tabbar" class:side>
@@ -225,7 +225,7 @@
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <path d="M2 6.5L7 2l5 4.5V12H9V9H5v3H2V6.5z"/>
       </svg>
-      {#if side}<span class="tab-label">Home</span>{/if}
+      {#if side}<span class="tab-label">{$t('tabbar.home')}</span>{/if}
     </div>
 
     <!-- File tabs -->
@@ -270,13 +270,13 @@
         <line x1="6" y1="2" x2="6" y2="10"/>
         <line x1="2" y1="6" x2="10" y2="6"/>
       </svg>
-      {#if side}<span>New tab</span>{/if}
+      {#if side}<span>{$t('tabbar.newTab')}</span>{/if}
     </button>
     <button
       class="layout-btn"
       onclick={toggleTabsPosition}
-      title={side ? "Show tabs at the top" : "Show tabs on the side"}
-      aria-label={side ? "Show tabs at the top" : "Show tabs on the side"}
+      title={side ? $t('tabbar.showTabsTopTitle') : $t('tabbar.showTabsSideTitle')}
+      aria-label={side ? $t('tabbar.showTabsTopTitle') : $t('tabbar.showTabsSideTitle')}
     >
       {#if side}<PanelTop size={14} />{:else}<PanelLeft size={14} />{/if}
     </button>
@@ -293,7 +293,7 @@
     maxWidth={() => maxTabsWidthFor(availableWidth())}
     cssVar="--tabs-w"
     resizingClass="tabs-resizing"
-    label="Resize tabs panel"
+    label={$t('tabbar.resize')}
     left="calc(var(--tabs-w, 220px) - 3px)"
     top="var(--chrome-top, 44px)"
     zIndex={15}
@@ -322,7 +322,7 @@
     </button>
     <div class="dropdown-separator"></div>
     <button onclick={handleTogglePositionFromMenu} class="dropdown-item">
-      <span>{side ? "Show Tabs at the Top" : "Show Tabs on the Side"}</span>
+      <span>{side ? $t('tabbar.showTabsTop') : $t('tabbar.showTabsSide')}</span>
     </button>
   </div>
 {/if}

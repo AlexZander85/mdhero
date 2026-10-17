@@ -63,7 +63,7 @@
     maxWidth={() => maxTocWidthFor(availableWidth())}
     cssVar="--toc-w"
     resizingClass="toc-resizing"
-    label="Resize table of contents"
+    label={$t('toc.resize')}
     left="calc(var(--tabs-w, 0px) + var(--toc-w, 240px) - 11px)"
     top="calc(var(--chrome-top, 88px) + 8px)"
     bottom="calc(var(--status-h, 0px) + 8px)"

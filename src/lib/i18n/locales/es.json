@@ -9,7 +9,8 @@
     "loading": "Cargando…",
     "cancel": "Cancelar",
     "save": "Guardar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "resizeHint": "Arrastra para cambiar el ancho; doble clic para restablecer"
   },
   "about": {
     "title": "Acerca de MDHero",
@@ -73,11 +74,17 @@
   "tabbar": {
     "unsaved": "Cambios sin guardar",
     "diskChanged": "Modificado en el disco mientras lo editabas",
+    "home": "Inicio",
     "newTab": "Nueva pestaña",
     "copyPath": "Copiar ruta",
     "copyFileName": "Copiar nombre del archivo",
     "openFileLocation": "Abrir ubicación del archivo",
-    "openFileLocationFailed": "Error"
+    "openFileLocationFailed": "Error",
+    "showTabsSide": "Mostrar pestañas al lado",
+    "showTabsTop": "Mostrar pestañas arriba",
+    "showTabsSideTitle": "Mostrar pestañas al lado",
+    "showTabsTopTitle": "Mostrar pestañas arriba",
+    "resize": "Cambiar el ancho del panel de pestañas"
   },
   "empty": {
     "description": "Un lector y editor de Markdown nativo.",
@@ -185,11 +192,17 @@
     "closeOnEscapeHint": "Pulsa ESC para cerrar la pestaña actual. La aplicación se cierra tras la última pestaña.",
     "restoreTabs": "Restaurar pestañas al iniciar",
     "restoreTabsHint": "Volver a abrir los archivos de la última vez, en el mismo orden.",
+    "openInExistingWindow": "Abrir los archivos en la ventana existente",
+    "openInExistingWindowHint": "Los archivos abiertos desde el explorador de archivos o la línea de comandos se abren aquí como pestañas en lugar de en ventanas nuevas. Se aplica a partir del próximo inicio de MDHero.",
+    "tabsOnSide": "Pestañas laterales",
+    "tabsOnSideHint": "Mostrar los archivos abiertos en un panel redimensionable a la izquierda en lugar de en una fila en la parte superior.",
     "autoPresentMarp": "Presentar automáticamente las diapositivas Marp",
     "autoPresentMarpHint": "Abrir documentos con {code} en el frontmatter como presentación.",
     "editor": "Editor",
     "lineNumbers": "Números de línea",
     "lineNumbersHint": "Mostrar la numeración de líneas en el editor.",
+    "syntaxHighlighting": "Resaltado de sintaxis",
+    "syntaxHighlightingHint": "Colorear títulos, enlaces, énfasis, listas y código en el editor.",
     "aiLookup": "Búsqueda IA",
     "aiLookupHint": "Haz clic derecho en el texto seleccionado del visor para enviarlo a una herramienta de IA. Gestiona proveedores y mensajes guardados abajo.",
     "language": "Idioma",
@@ -197,8 +210,7 @@
   },
   "toc": {
     "onThisPage": "En esta página",
-    "resize": "Cambiar el ancho del índice",
-    "resizeHint": "Arrastra para cambiar el ancho; doble clic para restablecer"
+    "resize": "Cambiar el ancho del índice"
   },
   "dropzone": {
     "drop": "Suelta para abrir"

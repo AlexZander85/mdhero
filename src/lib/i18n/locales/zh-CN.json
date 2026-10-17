@@ -9,7 +9,8 @@
     "loading": "加载中…",
     "cancel": "取消",
     "save": "保存",
-    "close": "关闭"
+    "close": "关闭",
+    "resizeHint": "拖动以调整宽度，双击恢复默认"
   },
   "about": {
     "title": "关于 MDHero",
@@ -72,11 +73,17 @@
   "tabbar": {
     "unsaved": "未保存的更改",
     "diskChanged": "在您编辑期间已在磁盘上被修改",
+    "home": "主页",
     "newTab": "新建标签页",
     "copyPath": "复制路径",
     "copyFileName": "复制文件名",
     "openFileLocation": "打开文件所在位置",
-    "openFileLocationFailed": "打开失败"
+    "openFileLocationFailed": "打开失败",
+    "showTabsSide": "在侧边显示标签页",
+    "showTabsTop": "在顶部显示标签页",
+    "showTabsSideTitle": "在侧边显示标签页",
+    "showTabsTopTitle": "在顶部显示标签页",
+    "resize": "调整标签页面板宽度"
   },
   "empty": {
     "description": "一款原生的 Markdown 阅读器与编辑器。",
@@ -184,11 +191,17 @@
     "closeOnEscapeHint": "按 ESC 关闭当前标签页。关闭最后一个标签页后退出应用。",
     "restoreTabs": "启动时恢复标签页",
     "restoreTabsHint": "按相同顺序重新打开上次打开的文件。",
+    "openInExistingWindow": "在现有窗口中打开文件",
+    "openInExistingWindowHint": "从文件管理器或命令行打开的文件会作为标签页在此打开，而不是打开新窗口。下次启动 MDHero 时生效。",
+    "tabsOnSide": "侧边标签页",
+    "tabsOnSideHint": "在左侧可调整宽度的面板中显示已打开的文件，而不是在顶部排成一行。",
     "autoPresentMarp": "自动演示 Marp 幻灯片",
     "autoPresentMarpHint": "frontmatter 包含 {code} 的文档以幻灯片方式打开。",
     "editor": "编辑器",
     "lineNumbers": "行号",
     "lineNumbersHint": "在编辑器中显示行号栏。",
+    "syntaxHighlighting": "语法高亮",
+    "syntaxHighlightingHint": "在编辑器中为标题、链接、强调、列表和代码着色。",
     "aiLookup": "AI 查询",
     "aiLookupHint": "在阅读器中右键选中文本，即可发送到 AI 工具。可在下方管理服务商和已保存的提示词。",
     "language": "语言",
@@ -196,8 +209,7 @@
   },
   "toc": {
     "onThisPage": "本页目录",
-    "resize": "调整目录宽度",
-    "resizeHint": "拖动以调整宽度，双击恢复默认"
+    "resize": "调整目录宽度"
   },
   "dropzone": {
     "drop": "拖放以打开"

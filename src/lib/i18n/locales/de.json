@@ -9,7 +9,8 @@
     "loading": "Laden…",
     "cancel": "Abbrechen",
     "save": "Speichern",
-    "close": "Schließen"
+    "close": "Schließen",
+    "resizeHint": "Ziehen zum Anpassen – Doppelklick zum Zurücksetzen"
   },
   "about": {
     "title": "Über MDHero",
@@ -73,11 +74,17 @@
   "tabbar": {
     "unsaved": "Ungespeicherte Änderungen",
     "diskChanged": "Auf dem Datenträger geändert, während Sie es bearbeitet haben",
+    "home": "Startseite",
     "newTab": "Neuer Tab",
     "copyPath": "Pfad kopieren",
     "copyFileName": "Dateinamen kopieren",
     "openFileLocation": "Dateispeicherort öffnen",
-    "openFileLocationFailed": "Fehlgeschlagen"
+    "openFileLocationFailed": "Fehlgeschlagen",
+    "showTabsSide": "Tabs seitlich anzeigen",
+    "showTabsTop": "Tabs oben anzeigen",
+    "showTabsSideTitle": "Tabs seitlich anzeigen",
+    "showTabsTopTitle": "Tabs oben anzeigen",
+    "resize": "Breite des Tab-Bereichs ändern"
   },
   "empty": {
     "description": "Ein nativer Markdown-Reader und -Editor.",
@@ -185,11 +192,17 @@
     "closeOnEscapeHint": "Drücken Sie Esc, um den aktuellen Tab zu schließen. Die App beendet sich nach dem letzten Tab.",
     "restoreTabs": "Tabs beim Start wiederherstellen",
     "restoreTabsHint": "Die zuletzt geöffneten Dateien in derselben Reihenfolge wieder öffnen.",
+    "openInExistingWindow": "Dateien im vorhandenen Fenster öffnen",
+    "openInExistingWindowHint": "Aus dem Dateimanager oder der Befehlszeile geöffnete Dateien werden hier als Tabs geöffnet statt in neuen Fenstern. Gilt ab dem nächsten Start von MDHero.",
+    "tabsOnSide": "Tabs seitlich",
+    "tabsOnSideHint": "Geöffnete Dateien in einem anpassbaren Bereich links statt in einer Leiste oben anzeigen.",
     "autoPresentMarp": "Marp-Deck automatisch präsentieren",
     "autoPresentMarpHint": "Dokumente mit {code} im Frontmatter als Slideshow öffnen.",
     "editor": "Editor",
     "lineNumbers": "Zeilennummern",
     "lineNumbersHint": "Zeilennummernleiste im Editor anzeigen.",
+    "syntaxHighlighting": "Syntaxhervorhebung",
+    "syntaxHighlightingHint": "Überschriften, Links, Hervorhebungen, Listen und Code im Editor einfärben.",
     "aiLookup": "KI-Nachschlage",
     "aiLookupHint": "Klicken Sie im Viewer mit der rechten Maustaste auf markierten Text, um ihn an ein KI-Tool zu senden. Verwalten Sie Anbieter und gespeicherte Prompts unten.",
     "language": "Sprache",
@@ -197,8 +210,7 @@
   },
   "toc": {
     "onThisPage": "Auf dieser Seite",
-    "resize": "Breite des Inhaltsverzeichnisses ändern",
-    "resizeHint": "Ziehen zum Anpassen – Doppelklick zum Zurücksetzen"
+    "resize": "Breite des Inhaltsverzeichnisses ändern"
   },
   "dropzone": {
     "drop": "Zum Öffnen ablegen"

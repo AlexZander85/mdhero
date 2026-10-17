@@ -9,7 +9,8 @@
     "loading": "Chargement…",
     "cancel": "Annuler",
     "save": "Enregistrer",
-    "close": "Fermer"
+    "close": "Fermer",
+    "resizeHint": "Faites glisser pour redimensionner — double-cliquez pour réinitialiser"
   },
   "about": {
     "title": "À propos de MDHero",
@@ -73,11 +74,17 @@
   "tabbar": {
     "unsaved": "Modifications non enregistrées",
     "diskChanged": "Modifié sur le disque pendant que vous l'éditiez",
+    "home": "Accueil",
     "newTab": "Nouvel onglet",
     "copyPath": "Copier le chemin",
     "copyFileName": "Copier le nom du fichier",
     "openFileLocation": "Ouvrir l'emplacement du fichier",
-    "openFileLocationFailed": "Échec"
+    "openFileLocationFailed": "Échec",
+    "showTabsSide": "Afficher les onglets sur le côté",
+    "showTabsTop": "Afficher les onglets en haut",
+    "showTabsSideTitle": "Afficher les onglets sur le côté",
+    "showTabsTopTitle": "Afficher les onglets en haut",
+    "resize": "Redimensionner le panneau des onglets"
   },
   "empty": {
     "description": "Un lecteur et éditeur Markdown natif.",
@@ -185,11 +192,17 @@
     "closeOnEscapeHint": "Appuyez sur Échap pour fermer l'onglet actif. L'application se ferme après le dernier onglet.",
     "restoreTabs": "Restaurer les onglets au démarrage",
     "restoreTabsHint": "Rouvrir les fichiers ouverts la dernière fois, dans le même ordre.",
+    "openInExistingWindow": "Ouvrir les fichiers dans la fenêtre existante",
+    "openInExistingWindowHint": "Les fichiers ouverts depuis le gestionnaire de fichiers ou la ligne de commande deviennent des onglets ici au lieu de nouvelles fenêtres. S'applique au prochain lancement de MDHero.",
+    "tabsOnSide": "Onglets sur le côté",
+    "tabsOnSideHint": "Afficher les fichiers ouverts dans un panneau redimensionnable à gauche plutôt que sur une rangée en haut.",
     "autoPresentMarp": "Présenter automatiquement les présentations Marp",
     "autoPresentMarpHint": "Ouvrir les documents avec {code} dans le frontmatter comme un diaporama.",
     "editor": "Éditeur",
     "lineNumbers": "Numéros de ligne",
     "lineNumbersHint": "Afficher les numéros de ligne dans la marge de l'éditeur.",
+    "syntaxHighlighting": "Coloration syntaxique",
+    "syntaxHighlightingHint": "Colorer les titres, les liens, l'emphase, les listes et le code dans l'éditeur.",
     "aiLookup": "Recherche IA",
     "aiLookupHint": "Cliquez avec le bouton droit sur un texte sélectionné dans la visionneuse pour l'envoyer à un outil d'IA. Gérez les fournisseurs et les prompts enregistrés ci-dessous.",
     "language": "Langue",
@@ -197,8 +210,7 @@
   },
   "toc": {
     "onThisPage": "Sur cette page",
-    "resize": "Redimensionner le sommaire",
-    "resizeHint": "Faites glisser pour redimensionner — double-cliquez pour réinitialiser"
+    "resize": "Redimensionner le sommaire"
   },
   "dropzone": {
     "drop": "Déposez pour ouvrir"

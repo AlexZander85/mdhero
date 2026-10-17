@@ -9,7 +9,8 @@
     "loading": "Loading...",
     "cancel": "Cancel",
     "save": "Save",
-    "close": "Close"
+    "close": "Close",
+    "resizeHint": "Drag to resize — double-click to reset"
   },
   "about": {
     "title": "About MDHero",
@@ -73,11 +74,17 @@
   "tabbar": {
     "unsaved": "Unsaved changes",
     "diskChanged": "Changed on disk while you were editing",
+    "home": "Home",
     "newTab": "New tab",
     "copyPath": "Copy Path",
     "copyFileName": "Copy File Name",
     "openFileLocation": "Open File Location",
-    "openFileLocationFailed": "Failed"
+    "openFileLocationFailed": "Failed",
+    "showTabsSide": "Show Tabs on the Side",
+    "showTabsTop": "Show Tabs at the Top",
+    "showTabsSideTitle": "Show tabs on the side",
+    "showTabsTopTitle": "Show tabs at the top",
+    "resize": "Resize tabs panel"
   },
   "empty": {
     "description": "A native Markdown reader and editor.",
@@ -185,11 +192,17 @@
     "closeOnEscapeHint": "Press ESC to close the current tab. App quits after the last tab.",
     "restoreTabs": "Restore tabs on launch",
     "restoreTabsHint": "Reopen the files that were open last time, in the same order.",
+    "openInExistingWindow": "Open files in the existing window",
+    "openInExistingWindowHint": "Files opened from your file manager or the command line become tabs here instead of new windows. Applies from the next launch of MDHero.",
+    "tabsOnSide": "Tabs on the side",
+    "tabsOnSideHint": "Show open files in a resizable panel on the left instead of a row across the top.",
     "autoPresentMarp": "Auto-present Marp decks",
     "autoPresentMarpHint": "Open documents with {code} frontmatter as a slideshow.",
     "editor": "Editor",
     "lineNumbers": "Line numbers",
     "lineNumbersHint": "Show a line-number gutter in the editor.",
+    "syntaxHighlighting": "Syntax highlighting",
+    "syntaxHighlightingHint": "Color headings, links, emphasis, lists and code in the editor.",
     "aiLookup": "AI Lookup",
     "aiLookupHint": "Right-click selected text in the viewer to send it to an AI tool. Manage providers and saved prompts below.",
     "language": "Language",
@@ -197,8 +210,7 @@
   },
   "toc": {
     "onThisPage": "On this page",
-    "resize": "Resize table of contents",
-    "resizeHint": "Drag to resize — double-click to reset"
+    "resize": "Resize table of contents"
   },
   "dropzone": {
     "drop": "Drop to open"

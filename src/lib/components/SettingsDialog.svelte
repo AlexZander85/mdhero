@@ -100,8 +100,8 @@
           {#if showWindowMode}
             <label class="setting-row">
               <div class="setting-text">
-                <span class="setting-label">Open files in the existing window</span>
-                <span class="setting-hint">Files opened from your file manager or the command line become tabs here instead of new windows. Applies from the next launch of MDHero.</span>
+                <span class="setting-label">{$t('settings.openInExistingWindow')}</span>
+                <span class="setting-hint">{$t('settings.openInExistingWindowHint')}</span>
               </div>
               <input
                 type="checkbox"
@@ -114,8 +114,8 @@
 
           <label class="setting-row">
             <div class="setting-text">
-              <span class="setting-label">Tabs on the side</span>
-              <span class="setting-hint">Show open files in a resizable panel on the left instead of a row across the top.</span>
+              <span class="setting-label">{$t('settings.tabsOnSide')}</span>
+              <span class="setting-hint">{$t('settings.tabsOnSideHint')}</span>
             </div>
             <input
               type="checkbox"
@@ -157,8 +157,8 @@
 
           <label class="setting-row">
             <div class="setting-text">
-              <span class="setting-label">Syntax highlighting</span>
-              <span class="setting-hint">Color headings, links, emphasis, lists and code in the editor.</span>
+              <span class="setting-label">{$t('settings.syntaxHighlighting')}</span>
+              <span class="setting-hint">{$t('settings.syntaxHighlightingHint')}</span>
             </div>
             <input
               type="checkbox"
