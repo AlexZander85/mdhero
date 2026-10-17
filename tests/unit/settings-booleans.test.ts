@@ -19,6 +19,7 @@ afterEach(() => {
 const BOOLEANS = [
   ["closeOnEscape", true],
   ["showLineNumbers", true],
+  ["syntaxHighlighting", true],
   ["autoPresentMarp", true],
   ["restoreTabsOnLaunch", true],
   ["wrapCodeBlocks", false],

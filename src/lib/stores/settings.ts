@@ -87,6 +87,7 @@ function loadSettings(): ReaderSettings {
         tocWidth: clampTocWidth(parsed.tocWidth),
         closeOnEscape: storedBoolean(parsed.closeOnEscape, defaults.closeOnEscape),
         showLineNumbers: storedBoolean(parsed.showLineNumbers, defaults.showLineNumbers),
+        syntaxHighlighting: storedBoolean(parsed.syntaxHighlighting, defaults.syntaxHighlighting),
         autoPresentMarp: storedBoolean(parsed.autoPresentMarp, defaults.autoPresentMarp),
         restoreTabsOnLaunch: storedBoolean(parsed.restoreTabsOnLaunch, defaults.restoreTabsOnLaunch),
         wrapCodeBlocks: storedBoolean(parsed.wrapCodeBlocks, defaults.wrapCodeBlocks),
