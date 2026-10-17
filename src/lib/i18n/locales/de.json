@@ -74,6 +74,9 @@
   "tabbar": {
     "unsaved": "Ungespeicherte Änderungen",
     "diskChanged": "Auf dem Datenträger geändert, während Sie es bearbeitet haben",
+    "folderPasted": "Eingefügt",
+    "folderNotSaved": "Noch nicht gespeichert",
+    "folderWebPage": "Webseite",
     "home": "Startseite",
     "newTab": "Neuer Tab",
     "copyPath": "Pfad kopieren",

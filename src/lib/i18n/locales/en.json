@@ -74,6 +74,9 @@
   "tabbar": {
     "unsaved": "Unsaved changes",
     "diskChanged": "Changed on disk while you were editing",
+    "folderPasted": "Pasted",
+    "folderNotSaved": "Not saved yet",
+    "folderWebPage": "Web page",
     "home": "Home",
     "newTab": "New tab",
     "copyPath": "Copy Path",

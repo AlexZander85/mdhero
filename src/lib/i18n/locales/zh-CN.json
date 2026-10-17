@@ -73,6 +73,9 @@
   "tabbar": {
     "unsaved": "未保存的更改",
     "diskChanged": "在您编辑期间已在磁盘上被修改",
+    "folderPasted": "已粘贴",
+    "folderNotSaved": "尚未保存",
+    "folderWebPage": "网页",
     "home": "主页",
     "newTab": "新建标签页",
     "copyPath": "复制路径",

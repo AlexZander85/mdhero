@@ -74,6 +74,9 @@
   "tabbar": {
     "unsaved": "Modifications non enregistrées",
     "diskChanged": "Modifié sur le disque pendant que vous l'éditiez",
+    "folderPasted": "Collé",
+    "folderNotSaved": "Pas encore enregistré",
+    "folderWebPage": "Page web",
     "home": "Accueil",
     "newTab": "Nouvel onglet",
     "copyPath": "Copier le chemin",

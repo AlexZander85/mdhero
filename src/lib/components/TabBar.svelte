@@ -253,7 +253,7 @@
           {#if side && withFolder.has(tab.id)}
             <span class="tab-text">
               <span class="tab-label">{@render tabName(tab)}</span>
-              <span class="tab-folder">{tabFolderLabel(tab.filePath)}</span>
+              <span class="tab-folder">{tabFolderLabel(tab.filePath, $t)}</span>
             </span>
           {:else}
             <span class="tab-label">{@render tabName(tab)}</span>
