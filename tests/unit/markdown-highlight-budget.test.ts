@@ -7,9 +7,9 @@ import { highlightMarkdownLines } from "../../src/lib/utils/markdown-highlight";
  * every keystroke, and 20 such lines (195 KB) froze editing for 2–4 s per key.
  * The scan now runs under a per-line work budget (STEPS_PER_CHAR).
  *
- * The time limit here is deliberately loose, about 20× what these take now and
- * about 1/3 of what they took before, so it catches the quadratic behaviour
- * coming back without being flaky on a slow CI runner.
+ * The time limit is about 10× what these take now, and under every one of the
+ * old timings (the fastest old case took 966 ms), so each case catches the
+ * quadratic behaviour coming back without being flaky on a slow CI runner.
  */
 const PATHOLOGICAL: [string, string][] = [
   ["unmatched [", "[".repeat(9999)],
@@ -27,7 +27,7 @@ describe("pathological lines stay fast", () => {
     const text = Array(20).fill(line).join("\n");
     const start = performance.now();
     const out = highlightMarkdownLines(text);
-    expect(performance.now() - start).toBeLessThan(1000);
+    expect(performance.now() - start).toBeLessThan(500);
     expect(out).toHaveLength(20);
   });
 });

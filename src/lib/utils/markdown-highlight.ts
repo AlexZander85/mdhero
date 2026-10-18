@@ -379,6 +379,9 @@ function blockLineWithinBudget(line: string, pipes: boolean): [string, LineKind]
     return blockLine(line, pipes);
   } catch (err) {
     if (!(err instanceof ScanBudgetExceeded)) throw err;
+    // The rerun does no inline scanning, so it needs no budget. Lifting it
+    // also keeps the rerun safe if a charged loop is ever added outside inline.
+    stepsLeft = Infinity;
     inlineEnabled = false;
     try {
       return blockLine(line, pipes);

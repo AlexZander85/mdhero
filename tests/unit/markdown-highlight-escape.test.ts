@@ -22,7 +22,7 @@ import { highlightMarkdownLines } from "../../src/lib/utils/markdown-highlight";
 
 const ALPHABET = [
   "<", ">", "&", '"', "'", "`", "*", "_", "~", "[", "]", "(", ")", "!", "$", "\\", "|", "#", "-",
-  ":", "=", " ", "\t", "a", "b", "1", "/", ".", "@", "h", "t", "p", "s", "w", "﻿", "é", "\r",
+  ":", "=", " ", "\t", "a", "b", "1", "/", ".", "@", "h", "t", "p", "s", "w", "\uFEFF", "é", "\r",
 ];
 const PAYLOADS = [
   "<script>alert(1)</script>",
@@ -84,5 +84,20 @@ describe("highlightMarkdownLines escapes everything it is given", () => {
       });
     }
     expect(failures.slice(0, 5)).toEqual([]);
+  });
+
+  // Lines that exhaust the scan budget take the fallback path (block syntax
+  // only, the rest escaped as plain text). It has to escape just as well.
+  // Each stays under MAX_INLINE_LINE, or it would skip scanning altogether.
+  it.each([
+    ["unclosed [ with payloads", "[<img src=x onerror=alert(1)>".repeat(300)],
+    ["unclosed * with payloads", "*a <script>alert(1)</script> ".repeat(300)],
+    ["unclosed $ in a heading", "# " + "$a <b>x</b> ".repeat(800)],
+    ["unclosed _ in a list item", "- " + "_a &amp; <i> ".repeat(700)],
+  ])("holds on the fallback path: %s", (_label, line) => {
+    const [html] = highlightMarkdownLines(line);
+    for (const tag of html.match(TAG) ?? []) expect(tag).toMatch(ALLOWED_TAG);
+    expect(html).not.toMatch(/&(?!lt;|gt;|amp;)/);
+    expect(decode(html)).toBe(line);
   });
 });
