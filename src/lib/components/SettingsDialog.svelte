@@ -137,6 +137,19 @@
               class="setting-switch"
             />
           </label>
+
+          <label class="setting-row">
+            <div class="setting-text">
+              <span class="setting-label">{$t('settings.autoCheckUpdates')}</span>
+              <span class="setting-hint">{$t('settings.autoCheckUpdatesHint')}</span>
+            </div>
+            <input
+              type="checkbox"
+              checked={$settings.autoCheckUpdates}
+              onchange={(e) => settings.update((s) => ({ ...s, autoCheckUpdates: e.currentTarget.checked }))}
+              class="setting-switch"
+            />
+          </label>
         </section>
 
         <section class="settings-section">

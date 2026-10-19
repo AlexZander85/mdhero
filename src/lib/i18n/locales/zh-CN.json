@@ -200,6 +200,8 @@
     "tabsOnSideHint": "在左侧可调整宽度的面板中显示已打开的文件，而不是在顶部排成一行。",
     "autoPresentMarp": "自动演示 Marp 幻灯片",
     "autoPresentMarpHint": "frontmatter 包含 {code} 的文档以幻灯片方式打开。",
+    "autoCheckUpdates": "自动检查更新",
+    "autoCheckUpdatesHint": "每天向 GitHub 查询一次是否有新版本，不会发送任何与你有关的信息。",
     "editor": "编辑器",
     "lineNumbers": "行号",
     "lineNumbersHint": "在编辑器中显示行号栏。",

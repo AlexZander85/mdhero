@@ -18,6 +18,9 @@ export interface ReaderSettings {
   tocWidth: number;
   /** Wrap long lines in rendered code blocks instead of scrolling them. */
   wrapCodeBlocks: boolean;
+  /** Ask GitHub once a day whether there is a newer release (#180). The
+   *  manual "Check for Updates…" works either way. */
+  autoCheckUpdates: boolean;
   /** Tabs in a row across the top, or in a resizable panel on the left. */
   tabsPosition: "top" | "side";
   /** Width of the side tabs panel in px. */
@@ -90,6 +93,7 @@ function loadSettings(): ReaderSettings {
     restoreTabsOnLaunch: true,
     tocWidth: DEFAULT_TOC_WIDTH,
     wrapCodeBlocks: false,
+    autoCheckUpdates: true,
     tabsPosition: "top",
     tabsWidth: DEFAULT_TABS_WIDTH,
   };
@@ -112,6 +116,7 @@ function loadSettings(): ReaderSettings {
         autoPresentMarp: storedBoolean(parsed.autoPresentMarp, defaults.autoPresentMarp),
         restoreTabsOnLaunch: storedBoolean(parsed.restoreTabsOnLaunch, defaults.restoreTabsOnLaunch),
         wrapCodeBlocks: storedBoolean(parsed.wrapCodeBlocks, defaults.wrapCodeBlocks),
+        autoCheckUpdates: storedBoolean(parsed.autoCheckUpdates, defaults.autoCheckUpdates),
         tabsPosition: parsed.tabsPosition === "side" ? "side" : "top",
         tabsWidth: clampTabsWidth(parsed.tabsWidth),
       };

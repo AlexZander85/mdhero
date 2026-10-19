@@ -1,5 +1,6 @@
 import { writable, get } from "svelte/store";
 import { getVersion } from "@tauri-apps/api/app";
+import { settings } from "./settings";
 
 /**
  * Where the update check asks for the latest release (#180).
@@ -73,6 +74,9 @@ async function fetchLatestRelease(): Promise<UpdateInfo | null> {
  */
 export async function checkForUpdates(force = false): Promise<void> {
   if (import.meta.env.DEV && !force) return;
+  // The automatic daily check can be switched off in Settings (#180). An
+  // explicit "Check for Updates…" is the user asking, so it always runs.
+  if (!force && !get(settings).autoCheckUpdates) return;
 
   if (!force) {
     try {

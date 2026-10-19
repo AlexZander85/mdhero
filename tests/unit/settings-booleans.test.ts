@@ -23,6 +23,7 @@ const BOOLEANS = [
   ["autoPresentMarp", true],
   ["restoreTabsOnLaunch", true],
   ["wrapCodeBlocks", false],
+  ["autoCheckUpdates", true],
 ] as const;
 
 describe.each(BOOLEANS)("the stored %s setting", (key, fallback) => {

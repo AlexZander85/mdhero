@@ -14,7 +14,7 @@ I will acknowledge your report within 48 hours and work with you to address the 
 
 MDHero runs locally on your machine. It does not collect data, require accounts, or communicate with external servers except for:
 
-- **Update check:** Once per 24 hours, MDHero asks GitHub for the latest release (`https://api.github.com/repos/vaibhav-kakde-in/mdhero/releases/latest`) and compares it with your installed version on your own machine. The request carries nothing about you: no version, no OS, no device ID. As with any web request, GitHub sees your IP address; see [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement). When you choose **Update now**, the update is downloaded from GitHub Releases and its signature is verified before it installs.
+- **Update check:** Once per 24 hours, MDHero asks GitHub for the latest release (`https://api.github.com/repos/vaibhav-kakde-in/mdhero/releases/latest`) and compares it with your installed version on your own machine. The request carries nothing about you: no version, no OS, no device ID. As with any web request, GitHub sees your IP address; see [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement). To stop the automatic check, turn off **Settings → Check for updates automatically**; **Check for Updates…** in the app menu still works when you ask. When you choose **Update now**, the update is downloaded from GitHub Releases and its signature is verified before it installs.
 - **Open URL:** When you explicitly paste a URL, MDHero fetches the raw content from that URL.
 
 Both of these are user-initiated or clearly disclosed.

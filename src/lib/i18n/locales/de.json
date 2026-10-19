@@ -201,6 +201,8 @@
     "tabsOnSideHint": "Geöffnete Dateien in einem anpassbaren Bereich links statt in einer Leiste oben anzeigen.",
     "autoPresentMarp": "Marp-Deck automatisch präsentieren",
     "autoPresentMarpHint": "Dokumente mit {code} im Frontmatter als Slideshow öffnen.",
+    "autoCheckUpdates": "Automatisch nach Updates suchen",
+    "autoCheckUpdatesHint": "Einmal am Tag bei GitHub nachfragen, ob es eine neuere Version gibt. Dabei wird nichts über Sie gesendet.",
     "editor": "Editor",
     "lineNumbers": "Zeilennummern",
     "lineNumbersHint": "Zeilennummernleiste im Editor anzeigen.",

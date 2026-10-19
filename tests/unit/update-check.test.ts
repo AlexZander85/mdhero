@@ -28,6 +28,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.unstubAllGlobals();
+  vi.unstubAllEnvs();
 });
 
 function release(tag: string) {
@@ -85,5 +86,44 @@ describe("the notification still works", () => {
     await expect(checkForUpdates(true)).resolves.toBeUndefined();
     expect(get(updateAvailable)).toBeNull();
     expect(get(checkInFlight)).toBe(false);
+  });
+});
+
+/**
+ * The automatic daily check can be switched off (#180). The check already skips
+ * itself in dev builds, and tests run as dev, so these switch DEV off first:
+ * otherwise "no request when off" would pass for the wrong reason. The first
+ * case proves the automatic path really runs here.
+ */
+describe("the automatic check follows the Settings switch", () => {
+  beforeEach(() => {
+    vi.stubEnv("DEV", false);
+  });
+
+  function withSetting(on: boolean) {
+    store.set("mdhero-settings", JSON.stringify({ autoCheckUpdates: on }));
+  }
+
+  it("checks automatically when the switch is on (the default)", async () => {
+    fetchMock.mockResolvedValue(release("v0.2.11"));
+    const { checkForUpdates } = await load();
+    await checkForUpdates();
+    expect(fetchMock).toHaveBeenCalledOnce();
+  });
+
+  it("makes no request at all when the switch is off", async () => {
+    withSetting(false);
+    const { checkForUpdates } = await load();
+    await checkForUpdates();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("still checks when the user asks, with the switch off", async () => {
+    withSetting(false);
+    fetchMock.mockResolvedValue(release("v0.2.11"));
+    const { checkForUpdates, updateAvailable } = await load();
+    await checkForUpdates(true);
+    expect(fetchMock).toHaveBeenCalledOnce();
+    expect(get(updateAvailable)).toMatchObject({ version: "0.2.11" });
   });
 });
