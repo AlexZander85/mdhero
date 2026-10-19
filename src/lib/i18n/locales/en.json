@@ -201,6 +201,8 @@
     "tabsOnSideHint": "Show open files in a resizable panel on the left instead of a row across the top.",
     "autoPresentMarp": "Auto-present Marp decks",
     "autoPresentMarpHint": "Open documents with {code} frontmatter as a slideshow.",
+    "autoCheckUpdates": "Check for updates automatically",
+    "autoCheckUpdatesHint": "Once a day, ask GitHub whether there is a newer release. Nothing about you is sent.",
     "editor": "Editor",
     "lineNumbers": "Line numbers",
     "lineNumbersHint": "Show a line-number gutter in the editor.",

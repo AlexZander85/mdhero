@@ -186,7 +186,7 @@ MDHero runs entirely on your machine.
 - **No telemetry.** No analytics. No tracking.
 - **No account required.** Use it anonymously.
 - **Your files never leave your computer.** Rendering happens locally.
-- **Network access** is limited to: checking for new releases (once per 24h) and fetching URLs you explicitly paste into the Open URL feature.
+- **Network access** is limited to: asking GitHub whether there is a newer release (once per 24h, sending nothing about you; you can turn this off in Settings) and fetching URLs you explicitly paste into the Open URL feature. See [SECURITY.md](SECURITY.md#scope) for exactly what each request contains.
 
 ---
 

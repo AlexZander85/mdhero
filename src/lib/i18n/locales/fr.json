@@ -201,6 +201,8 @@
     "tabsOnSideHint": "Afficher les fichiers ouverts dans un panneau redimensionnable à gauche plutôt que sur une rangée en haut.",
     "autoPresentMarp": "Présenter automatiquement les présentations Marp",
     "autoPresentMarpHint": "Ouvrir les documents avec {code} dans le frontmatter comme un diaporama.",
+    "autoCheckUpdates": "Rechercher les mises à jour automatiquement",
+    "autoCheckUpdatesHint": "Une fois par jour, demander à GitHub s'il existe une version plus récente. Rien vous concernant n'est envoyé.",
     "editor": "Éditeur",
     "lineNumbers": "Numéros de ligne",
     "lineNumbersHint": "Afficher les numéros de ligne dans la marge de l'éditeur.",
